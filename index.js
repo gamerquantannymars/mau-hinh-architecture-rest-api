@@ -24,29 +24,47 @@ const Product = mongoose.model('Product', productSchema);
 
 // Tạo sản phẩm mới
 app.post('/products', async (req, res) => {
-  const product = new Product(req.body);
-  await product.save();
-  res.status(201).send(product);
+  try {
+    const product = new Product(req.body);
+    await product.save();
+    res.status(201).send(product);
+  } catch (error) {
+    res.status(400).send({ error: 'Unable to create product' });
+  }
 });
 
 // Lấy danh sách sản phẩm
 app.get('/products', async (req, res) => {
-  const products = await Product.find();
-  res.send(products);
+  try {
+    const products = await Product.find();
+    res.send(products);
+  } catch (error) {
+    res.status(500).send({ error: 'Unable to fetch products' });
+  }
 });
 
 // Cập nhật thông tin sản phẩm
 app.put('/products/:id', async (req, res) => {
-  const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-    new: true
-  });
-  res.send(product);
+  try {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    });
+    if (!product) return res.status(404).send({ error: 'Product not found' });
+    res.send(product);
+  } catch (error) {
+    res.status(400).send({ error: 'Unable to update product' });
+  }
 });
 
 // Xóa sản phẩm
 app.delete('/products/:id', async (req, res) => {
-  await Product.findByIdAndDelete(req.params.id);
-  res.status(204).send();
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) return res.status(404).send({ error: 'Product not found' });
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).send({ error: 'Unable to delete product' });
+  }
 });
 
 app.listen(PORT, () => {
