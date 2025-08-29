@@ -4,7 +4,7 @@
   "description": "Dự án nhỏ về kiến trúc REST API sử dụng Node.js và Express để quản lý thông tin sản phẩm.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"  // Command to start the application
+    "start": "node index.js"  // Command to start the application by running index.js
   },
   "dependencies": {
     "express": "^4.17.1",  // Web framework for Node.js
