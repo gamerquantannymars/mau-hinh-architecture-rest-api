@@ -1,0 +1,14 @@
+{
+  "name": "mau-hinh-architecture-rest-api",
+  "version": "1.0.0",
+  "description": "Dự án nhỏ về kiến trúc REST API sử dụng Node.js và Express để quản lý thông tin sản phẩm.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9",
+    "body-parser": "^1.19.0"
+  }
+}
